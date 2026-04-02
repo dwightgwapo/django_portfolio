@@ -82,3 +82,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+if 'PYTHONANYWHERE_DOMAIN' in os.environ:
+    DEBUG = False
+    ALLOWED_HOSTS = ['dwightgeralde.pythonanywhere.com']
