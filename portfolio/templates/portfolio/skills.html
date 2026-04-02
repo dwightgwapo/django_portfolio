@@ -1,0 +1,243 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Skills{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <div class="page-header-content reveal">
+            <span class="section-subtitle">
+                <i class="fas fa-code"></i>
+                My Expertise
+            </span>
+            <h1 class="page-header-title text-accent">Technical Skills</h1>
+            <p class="page-header-subtitle">Technologies and tools I've worked with</p>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Content -->
+<section class="py-6">
+    <div class="container">
+        {% if skill_categories %}
+        <div class="row g-5">
+            {% for category in skill_categories %}
+            <div class="col-12 reveal">
+                <div class="skill-category-card">
+                    <h2 class="skill-category-title">
+                        <i class="fas fa-layer-group"></i>
+                        {{ category.name }}
+                    </h2>
+                    <div class="row g-4">
+                        {% for skill in category.skills.all %}
+                        <div class="col-md-6 col-lg-4">
+                            <div class="skill-card h-100">
+                                <div class="icon-wrapper">
+                                    {% if skill.icon %}
+                                    <i class="{{ skill.icon }}"></i>
+                                    {% else %}
+                                    <i class="fas fa-code"></i>
+                                    {% endif %}
+                                </div>
+                                <h5>{{ skill.name }}</h5>
+                                {% if skill.proficiency %}
+                                <div class="progress mt-3" style="height: 8px; border-radius: 4px;">
+                                    <div class="progress-bar" role="progressbar" style="width: {{ skill.proficiency }}%; background: var(--gradient-primary);" aria-valuenow="{{ skill.proficiency }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <small class="text-muted mt-1 d-block">{{ skill.proficiency }}% Proficiency</small>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="col-12">
+                            <p class="text-muted">No skills added to this category yet.</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <!-- Default Skills Display -->
+        <div class="row g-5">
+            <!-- Frontend Development -->
+            <div class="col-12 reveal">
+                <div class="skill-category-card">
+                    <h2 class="skill-category-title">
+                        <i class="fas fa-laptop-code" style="color: #2563eb;"></i>
+                        Frontend Development
+                    </h2>
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="skill-card h-100">
+                                <div class="icon-wrapper">
+                                    <i class="fab fa-html5"></i>
+                                </div>
+                                <h5>HTML5</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="skill-card h-100">
+                                <div class="icon-wrapper" style="background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);">
+                                    <i class="fab fa-css3-alt"></i>
+                                </div>
+                                <h5>CSS3</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="skill-card h-100">
+                                <div class="icon-wrapper" style="background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);">
+                                    <i class="fab fa-js"></i>
+                                </div>
+                                <h5>JavaScript</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Backend Development -->
+            <div class="col-12 reveal reveal-delay-1">
+                <div class="skill-category-card">
+                    <h2 class="skill-category-title">
+                        <i class="fas fa-server" style="color: #10b981;"></i>
+                        Backend Development
+                    </h2>
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="skill-card h-100">
+                                <div class="icon-wrapper" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+                                    <i class="fab fa-python"></i>
+                                </div>
+                                <h5>Python</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="skill-card h-100">
+                                <div class="icon-wrapper" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                                    <i class="fab fa-php"></i>
+                                </div>
+                                <h5>PHP</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="skill-card h-100">
+                                <div class="icon-wrapper" style="background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);">
+                                    <i class="fab fa-cuttlefish"></i>
+                                </div>
+                                <h5>C++</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="skill-card h-100">
+                                <div class="icon-wrapper" style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);">
+                                    <i class="fab fa-java"></i>
+                                </div>
+                                <h5>Java</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Databases & Tools -->
+            <div class="col-12 reveal reveal-delay-2">
+                <div class="skill-category-card">
+                    <h2 class="skill-category-title">
+                        <i class="fas fa-database" style="color: #8b5cf6;"></i>
+                        Databases & Tools
+                    </h2>
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="skill-card h-100">
+                                <div class="icon-wrapper" style="background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <h5>MySQL</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="skill-card h-100">
+                                <div class="icon-wrapper" style="background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <h5>MariaDB</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="skill-card h-100">
+                                <div class="icon-wrapper" style="background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);">
+                                    <a href="https://github.com/dwightgwapo" target="_blank" style="color: white;">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                                <h5>Git & GitHub</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Development Tools -->
+            <div class="col-12 reveal reveal-delay-3">
+                <div class="skill-category-card">
+                    <h2 class="skill-category-title">
+                        <i class="fas fa-tools" style="color: #f59e0b;"></i>
+                        Development Tools
+                    </h2>
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="skill-card h-100">
+                                <div class="icon-wrapper" style="background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <h5>VS Code</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="skill-card h-100">
+                                <div class="icon-wrapper" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                                    <i class="fas fa-terminal"></i>
+                                </div>
+                                <h5>Windows Terminal</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="skill-card h-100">
+                                <div class="icon-wrapper" style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);">
+                                    <i class="fas fa-laptop-code"></i>
+                                </div>
+                                <h5>PyCharm</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Skills Summary CTA -->
+<section class="py-6 bg-light mt-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center reveal">
+                <h2 class="section-title mb-4">Want to see my work?</h2>
+                <p class="text-muted mb-4">Check out my projects to see these skills in action</p>
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="{% url 'portfolio:projects' %}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-project-diagram me-2"></i>View Projects
+                    </a>
+                    <a href="{% url 'portfolio:contact' %}" class="btn btn-outline-dark btn-lg">
+                        <i class="fas fa-envelope me-2"></i>Get in Touch
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

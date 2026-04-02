@@ -1,0 +1,179 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Projects{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <div class="page-header-content reveal">
+            <span class="section-subtitle">
+                <i class="fas fa-project-diagram"></i>
+                Portfolio
+            </span>
+            <h1 class="page-header-title text-accent">My Projects</h1>
+            <p class="page-header-subtitle">A showcase of my work and side projects</p>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Grid -->
+<section class="py-6">
+    <div class="container">
+        {% if projects %}
+        <div class="row g-4">
+            {% for project in projects %}
+            <div class="col-md-6 col-lg-4 reveal {% if forloop.counter > 3 %}reveal-delay-{{ forloop.counter|add:"-3" }}{% endif %}">
+                <div class="project-card card h-100 border-0">
+                    {% if project.image %}
+                    <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}" style="height: 240px; object-fit: cover;">
+                    {% else %}
+                    <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 240px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <i class="fas fa-folder-open fa-4x text-white"></i>
+                    </div>
+                    {% endif %}
+                    <div class="card-overlay">
+                        <div class="overlay-content">
+                            <h5 class="fw-bold mb-3">{{ project.title }}</h5>
+                            <div class="d-flex gap-2 justify-content-center">
+                                <a href="https://github.com/dwightgwapo" target="_blank" aria-label="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                                {% if project.live_url %}
+                                <a href="{{ project.live_url }}" target="_blank" class="btn btn-light btn-sm">
+                                    <i class="fas fa-external-link-alt me-1"></i>Live
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">{{ project.title }}</h5>
+                        <p class="card-text text-muted flex-grow-1">{{ project.description }}</p>
+                        <div class="project-meta">
+                            {% for tech in project.get_technology_list %}
+                            <span class="tech-tag">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-0 text-muted small">
+                        <i class="far fa-calendar-alt me-1 text-primary"></i>Created: {{ project.created_at|date:"F Y" }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <!-- Sample Projects (shown when no projects in database) -->
+        <div class="row g-4">
+            <div class="col-md-6 reveal">
+                <div class="project-card card h-100 border-0">
+                    <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 240px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <i class="fas fa-paw fa-4x text-white"></i>
+                    </div>
+                    <div class="card-overlay">
+                        <div class="overlay-content">
+                            <h5 class="fw-bold mb-3">Online Animal Marketplace</h5>
+                            <p class="small mb-3">Console-based marketplace in C++</p>
+                        </div>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">Online Animal Marketplace</h5>
+                        <p class="card-text text-muted flex-grow-1">A console-based marketplace application for buying and selling animals. Features include user registration, animal listings, search and filter, and transaction management.</p>
+                        <div class="project-meta">
+                            <span class="tech-tag">C++</span>
+                            <span class="tech-tag">OOP</span>
+                            <span class="tech-tag">File Handling</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 reveal reveal-delay-1">
+                <div class="project-card card h-100 border-0">
+                    <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 240px; background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                        <i class="fas fa-syringe fa-4x text-white"></i>
+                    </div>
+                    <div class="card-overlay">
+                        <div class="overlay-content">
+                            <h5 class="fw-bold mb-3">Animal Vaccination Program</h5>
+                            <p class="small mb-3">Web-based system in PHP</p>
+                        </div>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">Animal Vaccination Program</h5>
+                        <p class="card-text text-muted flex-grow-1">A web-based system for managing animal vaccination records. Features include pet registration, vaccination scheduling, record tracking, and notification alerts.</p>
+                        <div class="project-meta">
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">HTML/CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 reveal reveal-delay-2">
+                <div class="project-card card h-100 border-0">
+                    <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 240px; background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);">
+                        <i class="fas fa-briefcase fa-4x text-white"></i>
+                    </div>
+                    <div class="card-overlay">
+                        <div class="overlay-content">
+                            <h5 class="fw-bold mb-3">Job Recruitment System</h5>
+                            <p class="small mb-3">Desktop app in Java</p>
+                        </div>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">Job Recruitment for Small City Jobs</h5>
+                        <p class="card-text text-muted flex-grow-1">A desktop application for managing job recruitment in small cities. Features include job posting, applicant tracking, resume management, and employer-employee matching.</p>
+                        <div class="project-meta">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">NetBeans</span>
+                            <span class="tech-tag">MySQL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 reveal reveal-delay-3">
+                <div class="project-card card h-100 border-0">
+                    <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 240px; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);">
+                        <i class="fas fa-user-graduate fa-4x text-white"></i>
+                    </div>
+                    <div class="card-overlay">
+                        <div class="overlay-content">
+                            <h5 class="fw-bold mb-3">Student Information System</h5>
+                            <p class="small mb-3">Web-based system</p>
+                        </div>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">Student Information</h5>
+                        <p class="card-text text-muted flex-grow-1">A web-based system for managing student records and information. Features include student registration, grade tracking, course enrollment, and academic performance monitoring.</p>
+                        <div class="project-meta">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">PHP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-6 bg-gradient-dark text-white">
+    <div class="container text-center">
+        <h2 class="display-4 fw-bold mb-4 text-accent">Have an idea for a project?</h2>
+        <p class="lead mb-4 opacity-75">I'm always open to collaborating on interesting projects and bringing ideas to life.</p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <a href="{% url 'portfolio:contact' %}" class="btn btn-accent btn-lg">
+                <i class="fas fa-paper-plane me-2"></i>Let's Collaborate
+            </a>
+            <a href="https://github.com/dwightgwapo" target="_blank" class="btn btn-outline-light btn-lg">
+                <i class="fab fa-github me-2"></i>View GitHub
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

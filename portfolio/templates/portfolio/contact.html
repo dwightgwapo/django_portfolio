@@ -1,0 +1,228 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <div class="page-header-content reveal">
+            <span class="section-subtitle">
+                <i class="fas fa-envelope"></i>
+                Get In Touch
+            </span>
+            <h1 class="page-header-title text-accent">Contact Me</h1>
+            <p class="page-header-subtitle">Have a question or want to work together? I'd love to hear from you!</p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Content -->
+<section class="py-6">
+    <div class="container">
+        <div class="row g-5">
+            <!-- Contact Information -->
+            <div class="col-lg-5 reveal-left">
+                <div class="contact-info">
+                    <span class="section-subtitle">
+                        <i class="fas fa-address-card"></i>
+                        Contact Information
+                    </span>
+                    <h2 class="section-title mb-4">Let's Connect</h2>
+                    <p class="text-muted mb-4">Feel free to reach out through any of these channels. I'll get back to you as soon as possible.</p>
+                    
+                    <div class="contact-item mb-4 d-flex">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Email</h6>
+                            {% if profile and profile.email %}
+                            <p class="text-muted mb-0">{{ profile.email }}</p>
+                            <a href="mailto:{{ profile.email }}" class="text-primary">Send an email</a>
+                            {% else %}
+                            <p class="text-muted mb-0">your.email@example.com</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    {% if profile and profile.phone %}
+                    <div class="contact-item mb-4 d-flex">
+                        <div class="contact-icon" style="background: var(--gradient-accent);">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Phone</h6>
+                            <p class="text-muted mb-0">{{ profile.phone }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if profile and profile.location %}
+                    <div class="contact-item mb-4 d-flex">
+                        <div class="contact-icon" style="background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Location</h6>
+                            <p class="text-muted mb-0">{{ profile.location }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="mt-4">
+                        <h6 class="fw-bold mb-3">Follow Me</h6>
+                        <div class="social-links">
+                            <a href="https://github.com/dwightgwapo" target="_blank" aria-label="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            {% if profile and profile.linkedin_url %}
+                            <a href="{{ profile.linkedin_url }}" target="_blank" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            {% endif %}
+                            {% if profile and profile.twitter_url %}
+                            <a href="{{ profile.twitter_url }}" target="_blank" aria-label="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            {% endif %}
+                            {% if profile and profile.website_url %}
+                            <a href="{{ profile.website_url }}" target="_blank" aria-label="Website">
+                                <i class="fas fa-globe"></i>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Form -->
+            <div class="col-lg-7 reveal-right">
+                <div class="contact-form-wrapper">
+                    <span class="section-subtitle">
+                        <i class="fas fa-paper-plane"></i>
+                        Send a Message
+                    </span>
+                    <h2 class="section-title mb-4">Get In Touch</h2>
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="{{ form.name.id_for_label }}" class="form-label">Your Name</label>
+                                {{ form.name }}
+                                {% if form.name.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.name.errors.0 }}
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                <label for="{{ form.email.id_for_label }}" class="form-label">Your Email</label>
+                                {{ form.email }}
+                                {% if form.email.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.email.errors.0 }}
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-12">
+                                <label for="{{ form.subject.id_for_label }}" class="form-label">Subject</label>
+                                {{ form.subject }}
+                                {% if form.subject.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.subject.errors.0 }}
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-12">
+                                <label for="{{ form.message.id_for_label }}" class="form-label">Message</label>
+                                {{ form.message }}
+                                {% if form.message.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.message.errors.0 }}
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary btn-lg w-100">
+                                    <i class="fas fa-paper-plane me-2"></i>Send Message
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-6 bg-light">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-subtitle">
+                <i class="fas fa-question-circle"></i>
+                FAQ
+            </span>
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="section-divider"></div>
+            <p class="section-description">Quick answers to common questions</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 reveal">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What kind of projects do you work on?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            I build small web applications, personal projects, and school assignments. I'm also learning to create dynamic websites using Python, Django, PHP, and C++.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 reveal reveal-delay-1">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Are you available for collaboration?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes! I'm open to working on group projects, internships, or small freelance projects. Feel free to contact me to discuss ideas.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 reveal reveal-delay-2">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What technologies are you learning?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            I'm currently working with Python, Django, JavaScript, PHP, C++, and databases like MySQL and MariaDB.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 reveal reveal-delay-3">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How can we get started?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            You can send me a message with your project or idea, and we can discuss what you want to build together.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

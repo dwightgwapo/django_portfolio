@@ -1,0 +1,139 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <div class="page-header-content reveal">
+            <span class="section-subtitle">
+                <i class="fas fa-user"></i>
+                About Me
+            </span>
+            <h1 class="page-header-title text-accent">Who I Am</h1>
+            <p class="page-header-subtitle">Get to know more about who I am and what I do</p>
+        </div>
+    </div>
+</section>
+
+<!-- About Content -->
+<section class="py-6">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-5 reveal-left">
+                <div class="about-image-wrapper">
+                    {% if profile and profile.profile_photo %}
+                    <img src="{{ profile.profile_photo.url }}" alt="{{ profile.full_name }}" class="img-fluid rounded-circle shadow-lg" style="max-width: 100%; width: 350px; height: 350px; object-fit: cover; display: block; margin: 0 auto;">
+                    {% else %}
+                    <div class="about-placeholder rounded-4 bg-gradient-primary d-flex align-items-center justify-content-center shadow-lg" style="height: 400px;">
+                        <i class="fas fa-user fa-5x text-white"></i>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-7 reveal-right">
+                <div class="about-content">
+                    <span class="section-subtitle">
+                        <i class="fas fa-info-circle"></i>
+                        Personal Background
+                    </span>
+                    <div class="about-text mb-4">
+                        <p class="lead text-muted">I am a third-year Information Technology student at Negros Oriental State University (NORSU). I am passionate about learning and developing my skills in web development. I enjoy building projects that help me improve my knowledge and gain hands-on experience in the IT field.</p>
+                    </div>
+                    
+                    <h4 class="fw-bold mb-3">My Journey</h4>
+                    <div class="about-text mb-4">
+                        <p class="text-muted">My interest in technology started with curiosity about how websites and applications work. Over time, I began learning programming and building small projects. I am now an aspiring full-stack developer, continuously improving my skills and creating meaningful applications.</p>
+                    </div>
+                    
+                    <h4 class="fw-bold mb-3">Values & Philosophy</h4>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <div class="icon-wrapper flex-shrink-0 me-3" style="width: 40px; height: 40px;">
+                                    <i class="fas fa-infinity"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Continuous Learning</h6>
+                                    <p class="small text-muted mb-0">Always improving skills and exploring new technologies</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <div class="icon-wrapper flex-shrink-0 me-3" style="width: 40px; height: 40px; background: var(--gradient-accent);">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">User-Focused</h6>
+                                    <p class="small text-muted mb-0">Building simple and user-friendly applications</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <div class="icon-wrapper flex-shrink-0 me-3" style="width: 40px; height: 40px; background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);">
+                                    <i class="fas fa-handshake"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Collaboration</h6>
+                                    <p class="small text-muted mb-0">Open to teamwork and learning from others</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <div class="icon-wrapper flex-shrink-0 me-3" style="width: 40px; height: 40px; background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Clean Code</h6>
+                                    <p class="small text-muted mb-0">Writing organized and maintainable code</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row g-3 mb-4">
+                        {% if profile and profile.location %}
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center p-3 bg-light rounded-3">
+                                <i class="fas fa-map-marker-alt text-primary me-3 fa-lg"></i>
+                                <div>
+                                    <small class="text-muted">Location</small>
+                                    <p class="mb-0 fw-bold">Bayawan City, Neg. Or.</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if profile and profile.email %}
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center p-3 bg-light rounded-3">
+                                <i class="fas fa-envelope text-primary me-3 fa-lg"></i>
+                                <div>
+                                    <small class="text-muted">Email</small>
+                                    <p class="mb-0 fw-bold">{{ profile.email }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="{% url 'portfolio:contact' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-envelope me-2"></i>Contact Me
+                        </a>
+                        {% if profile and profile.resume %}
+                        <a href="{{ profile.resume.url }}" class="btn btn-outline-dark btn-lg" target="_blank">
+                            <i class="fas fa-download me-2"></i>Download Resume
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
