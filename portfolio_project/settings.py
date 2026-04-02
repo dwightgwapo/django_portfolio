@@ -85,4 +85,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 if 'PYTHONANYWHERE_DOMAIN' in os.environ:
     DEBUG = False
-    ALLOWED_HOSTS = ['dwightgeralde.pythonanywhere.com']
+    ALLOWED_HOSTS = ['DwightVandrewGeralde.pythonanywhere.com']
